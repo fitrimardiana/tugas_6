@@ -1,12 +1,9 @@
 USE consumer;
 
 /* Jumlah komplain setiap bulan */
-SELECT month(date_received) AS bulan,
-       SUM(IF(YEAR(date_received) = 2013, month(date_received), 0)) AS 'tahun 2013',
-       SUM(IF(YEAR(date_received) = 2014, month(date_received), 0)) AS 'tahun 2014',
-       SUM(IF(YEAR(date_received) = 2015, month(date_received), 0)) AS 'tahun 2015'
+SELECT CONCAT (YEAR(date_received), '/', MONTH(date_received)) AS tahun_bulan, COUNT (*) AS jumlah_bulanan
 FROM consumer_complaints
-GROUP BY month(date_received);
+GROUP BY YEAR(date_received), MONTH(date_received);
 
 
 /* Komplain yang memiliki tags 'Older American' */
